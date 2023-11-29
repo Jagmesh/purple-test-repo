@@ -1,30 +1,26 @@
-import { EventEmitter } from 'node:events';
-import { addListenersOnOperators } from './operators/add_listeners.js';
+import { addListenersOnOperators, calcEmmiter } from './operators/add_listeners.js';
 
-function calculate(calcData) {
+function calculate(firstNumber, secondNumber, mathOperator) {
     return new Promise((resolve) => {
-        const [firstNumber, secondNumber, mathOperator] = calcData
-        const calcEmmiter = new EventEmitter()
+        const mathOperators = [
+            'add', 'divide', 'extract', 'multiply'
+        ]
+         
         calcEmmiter.addListener('result', (result) => resolve(result) )
 
-        addListenersOnOperators(calcEmmiter)   
-        
-        switch(mathOperator) {
-            case 'add':
-            case 'extract':
-            case 'multiply':
-            case 'divide':
-                calcEmmiter.emit(mathOperator, firstNumber, secondNumber)
-                break;
-            default:
-                throw new Error('You have entered wrong mathOperator. Try using "add", "extract", "multiply" or "divide"')
+        addListenersOnOperators(calcEmmiter)        
+
+        if(!mathOperators.includes(mathOperator)) {
+            throw new Error('You have entered wrong mathOperator. Try using "add", "extract", "multiply" or "divide"')
         }
+
+        calcEmmiter.emit(mathOperator, firstNumber, secondNumber)
     })
 }
 
 async function main() {
-    const [nodePath, appPath, ...calcData] = process.argv
-    console.log(`Результат: ${await calculate(calcData)}`)
+    const [,, firstNumber, secondNumber, mathOperator] = process.argv
+    console.log(`Результат: ${await calculate(firstNumber, secondNumber, mathOperator)}`)
 }
 
 main()

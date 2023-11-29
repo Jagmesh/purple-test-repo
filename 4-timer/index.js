@@ -1,13 +1,8 @@
 import { validateAndParseData } from "./helpers/validate-data.js"
 
-function setTimer(timerData) {
-    let validatedTimerData;
-    try {
-        validatedTimerData = validateAndParseData(timerData)
-    } catch (error) {
-        console.log(`Error: ${error.message}. Format: <number>h <number>m <number>s. For example: 1h 10m 0s or 0h 0m 30`)
-        return;
-    }
+function setTimer(hours, minutes, seconds) {
+    const validatedTimerData = validateAndParseData(hours, minutes, seconds)
+
     const timerInMS = (
         validatedTimerData[0]* 60 * 60
          + validatedTimerData[1] * 60 
@@ -19,5 +14,5 @@ function setTimer(timerData) {
     }, timerInMS)
 }
 
-const [,, ...timerData] = process.argv
-setTimer(timerData)
+const [,, hours, minutes, seconds] = process.argv
+setTimer(hours, minutes, seconds)

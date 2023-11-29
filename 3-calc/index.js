@@ -3,22 +3,18 @@ import { divide } from "./operators/divide.js"
 import { extract } from "./operators/extract.js"
 import { multiply } from "./operators/multiply.js"
 
-function calculate(calcData) {
-    const [firstNumber, secondNumber, mathOperator] = calcData
-    
-    switch(mathOperator) {
-        case 'add':
-            return add(firstNumber, secondNumber)
-        case 'extract':
-            return extract(firstNumber, secondNumber)
-        case 'multiply':
-            return multiply(firstNumber, secondNumber)
-        case 'divide':
-            return divide(firstNumber, secondNumber)
-        default:
-            throw new Error('You have entered wrong mathOperator. Try using "add", "extract", "multiply" or "divide"')
+function calculate(firstNumber, secondNumber, mathOperator) {
+    const mathOperators = {
+        add, divide, extract, multiply
     }
+   
+    if(!Object.hasOwnProperty.call(mathOperators, mathOperator)) {
+        throw new Error('You have entered wrong mathOperator. Try using "add", "extract", "multiply" or "divide"')
+    }
+
+    return mathOperators[mathOperator](firstNumber, secondNumber);
+    //Если я использую такую форму записи, то у меня нет подсказок, какие аргументы принимает функции
 }
 
-const [nodePath, appPath, ...calcData] = process.argv
-console.log(calculate(calcData))
+const [,, firstNumber, secondNumber, mathOperator] = process.argv
+console.log(calculate(firstNumber, secondNumber, mathOperator))
