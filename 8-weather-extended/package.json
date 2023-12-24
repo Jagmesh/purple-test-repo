@@ -1,0 +1,25 @@
+{
+  "name": "node-weather-ultra-cli",
+  "version": "1.0.0",
+  "description": "CLI with weather stuff",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jagmesh/purple-test-repo.git"
+  },
+  "author": "Artyom Jagmesh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jagmesh/purple-test-repo/issues"
+  },
+  "homepage": "https://github.com/Jagmesh/purple-test-repo#readme",
+  "dependencies": {
+    "axios": "^1.6.2",
+    "chalk": "^5.3.0",
+    "dedent-js": "^1.0.1"
+  }
+}
