@@ -1,6 +1,7 @@
 import chalk from "chalk";
 import dedent from 'dedent-js';
 import {LANGUAGE} from "../global/enum.js";
+import {IOpenWeatherResponse} from "./weather/weather.interface";
 
 export class LogService {
     static write(message: string, scope?: string) {
@@ -29,7 +30,7 @@ export class LogService {
         );
     }
 
-    static showWeatherData(data: IOpenWeatherMap_WeatherDto, language: string) {
+    static showWeatherData(data: IOpenWeatherResponse, language: string) {
         switch (language) {
             case LANGUAGE.RUSSIAN:
                 console.log(

@@ -7,24 +7,24 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import * as process from "process";
 import { getArguments } from "./helpers/get-args.js";
 import { addCity, deleteCities, getKeyValue, getWeatherByCity, LogService, saveCity, saveLanguage, saveToken } from "./services/index.js";
 import { LANGUAGE, STORAGE_KEYS } from "./global/enum.js";
 import axios from "axios";
+import 'dotenv/config';
 function getWeatherInfo() {
     var _a, _b;
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const city = yield getKeyValue(STORAGE_KEYS.CITY);
+            const cities = yield getKeyValue(STORAGE_KEYS.CITY);
             const token = yield getKeyValue(STORAGE_KEYS.TOKEN);
             const language = (yield getKeyValue(STORAGE_KEYS.LANGUAGE)) || LANGUAGE.RUSSIAN;
-            if (!city || !token || !language) {
+            if (!cities || !token || !language) {
                 LogService.error(`Не указан токен, город или язык`);
                 return;
             }
-            const cities = city.split(', ');
-            for (const cityEl of cities) {
+            const citiesArray = cities.split(', ');
+            for (const cityEl of citiesArray) {
                 const weather = yield getWeatherByCity(cityEl, token, language);
                 LogService.showWeatherData(weather, language);
             }
@@ -40,7 +40,8 @@ function getWeatherInfo() {
                     return;
                 }
             }
-            LogService.error(error.message);
+            if (error instanceof Error)
+                LogService.error(error.message);
         }
     });
 }

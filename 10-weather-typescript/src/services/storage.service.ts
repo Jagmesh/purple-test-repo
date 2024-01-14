@@ -4,7 +4,7 @@ import { promises } from 'fs';
 
 const filePath = join(homedir(), 'weather-data.json');
 
-export async function saveKeyValue(key: string, value: string) {
+export async function saveKeyValue(key: string, value: string): Promise<void> {
     let data: IArgs = {};
     if (await isExist(filePath)) {
         const file = await promises.readFile(filePath);
@@ -22,8 +22,8 @@ export async function getKeyValue(key: string): Promise<null | string> {
     return data[key];
 };
 
-export async function deleteKey(key: string): Promise<null | void> {
-    if (!await isExist(filePath)) return null;
+export async function deleteKey(key: string): Promise<void> {
+    if (!await isExist(filePath)) return;
 
     const file = await promises.readFile(filePath);
     const data = JSON.parse(file.toString());

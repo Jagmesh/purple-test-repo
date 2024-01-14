@@ -1,13 +1,9 @@
-interface IArgs {
-    [key: string]: string | true;
-}
-
-interface IOpenWeatherMap_WeatherDto {
+export interface IOpenWeatherResponse {
     coord: {
         lon: number;
         lat: number;
     },
-    weather: IWeatherObject[],
+    weather: IWeather[],
     base: string;
     main: {
         temp: number;
@@ -24,7 +20,7 @@ interface IOpenWeatherMap_WeatherDto {
         speed: number;
         deg: number;
         gust: number;
-        },
+    },
     clouds: { all: number; },
     dt: number;
     sys: {
@@ -40,7 +36,7 @@ interface IOpenWeatherMap_WeatherDto {
     cod: number;
 }
 
-interface IWeatherObject {
+export interface IWeather {
     id: number;
     main: string;
     description: string;

@@ -10,8 +10,8 @@ export async function saveCity(city: string) {
     try {
         await saveKeyValue(STORAGE_KEYS.CITY, city);
         LogService.success('Город сохранён');
-    } catch (e) {
-        LogService.error(`${e}`);
+    } catch (error) {
+        LogService.error(`${error}`);
     }
 }
 
@@ -28,8 +28,8 @@ export async function addCity(city: string) {
         }
         await saveKeyValue(STORAGE_KEYS.CITY, `${cities}, ${city}`);
         LogService.success(`Город ${city} добавлен в список`);
-    } catch (e) {
-        LogService.error(`${e}`);
+    } catch (error) {
+        LogService.error(`${error}`);
     }
 }
 export async function saveToken(token: string) {
@@ -40,8 +40,8 @@ export async function saveToken(token: string) {
     try {
         await saveKeyValue(STORAGE_KEYS.TOKEN, token);
         LogService.success('Токен сохранён');
-    } catch (e) {
-        LogService.error(`${e}`);
+    } catch (error) {
+        LogService.error(`${error}`);
     }
 }
 
@@ -53,8 +53,8 @@ export async function saveLanguage(language: string) {
     try {
         await saveKeyValue(STORAGE_KEYS.LANGUAGE, language);
         LogService.success('Язык сохранён');
-    } catch (e) {
-        LogService.error(`${e}`);
+    } catch (error) {
+        LogService.error(`${error}`);
     }
 }
 
@@ -62,7 +62,7 @@ export async function deleteCities() {
     try {
         await deleteKey(STORAGE_KEYS.CITY);
         LogService.success('Города удалены');
-    } catch (e) {
-        LogService.error(`${e}`);
+    } catch (error) {
+        LogService.error(`${error}`);
     }
 }

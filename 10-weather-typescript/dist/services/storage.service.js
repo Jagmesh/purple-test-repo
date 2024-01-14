@@ -36,7 +36,7 @@ export function getKeyValue(key) {
 export function deleteKey(key) {
     return __awaiter(this, void 0, void 0, function* () {
         if (!(yield isExist(filePath)))
-            return null;
+            return;
         const file = yield promises.readFile(filePath);
         const data = JSON.parse(file.toString());
         delete data[key];

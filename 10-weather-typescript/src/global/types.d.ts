@@ -1,0 +1,1 @@
+interface IArgs extends Record<string, string | true> {}
